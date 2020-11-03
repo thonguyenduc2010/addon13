@@ -212,7 +212,7 @@ class Inventory(models.Model):
             locations = self.env['stock.location'].search([('id', 'child_of', self.location_ids.ids)])
         else:
             locations = self.env['stock.location'].search([('company_id', '=', self.company_id.id), ('usage', 'in', ['internal', 'transit'])])
-        domain = ' location_id in %s AND quantity != 0 AND active = TRUE'
+        domain = ' location_id in %s AND quantity >= 0 AND active = TRUE'
         args = (tuple(locations.ids),)
 
         vals = []
